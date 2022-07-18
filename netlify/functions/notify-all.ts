@@ -15,9 +15,10 @@ const handler: Handler = async (event) => {
     },
   });
 
-  subscriptions.forEach(({ subscription }) => {
-    webpush.sendNotification(JSON.parse(subscription), notification);
-  });
+  const sendNotificationPromises = subscriptions
+    .map(({ subscription }) => webpush.sendNotification(JSON.parse(subscription), notification));
+
+  await Promise.all(sendNotificationPromises);
 
   return {
     statusCode: 200,
