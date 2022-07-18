@@ -1,0 +1,6 @@
+node_modules
+package-lock.json
+.idea
+.vscode
+.netlify
+netlify/edge-functions-import-map.json

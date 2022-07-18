@@ -1,0 +1,38 @@
+{
+  "name": "web-push-sample",
+  "version": "1.0.0",
+  "description": "Web Push Notification Sample for Dicoding Academy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "netlify dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dicodingacademy/web-push-sample.git"
+  },
+  "keywords": [
+    "web push",
+    "notification",
+    "dicoding"
+  ],
+  "author": "Dimas Saputra <dimas@dicoding.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dicodingacademy/web-push-sample/issues"
+  },
+  "homepage": "https://github.com/dicodingacademy/web-push-sample#readme",
+  "devDependencies": {
+    "@types/web-push": "^3.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "eslint": "^8.20.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "netlify-cli": "^10.10.0"
+  },
+  "dependencies": {
+    "@netlify/functions": "^1.0.0",
+    "web-push": "^3.5.0"
+  }
+}
