@@ -5,3 +5,4 @@ package-lock.json
 .netlify
 netlify/edge-functions-import-map.json
 .env
+.test.env

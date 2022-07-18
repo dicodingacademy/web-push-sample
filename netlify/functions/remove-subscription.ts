@@ -1,10 +1,11 @@
 import { Handler } from '@netlify/functions';
-import { addSubscription } from '../libs/database';
+import { removeSubscription } from '../libs/database';
 
 const handler: Handler = async (event) => {
-  await addSubscription(event.body);
+  await removeSubscription(event.body);
+
   return {
-    statusCode: 201,
+    statusCode: 200,
     body: JSON.stringify({
       message: 'OK',
     }),

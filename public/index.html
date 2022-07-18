@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Web Push Notification Sample</title>
+	<style>
+      textarea {
+          display: block;
+          height: 125px;
+          width: 400px;
+      }
+
+      button {
+          margin-right: 10px;
+          margin-top: 10px;
+          min-width: 48px;
+          min-height: 48px;
+      }
+	</style>
+</head>
+<body>
+<h1>Push Notification client</h1>
+
+<h2><label for="textAreaServiceWorker">Service worker</label></h2>
+<textarea id="textAreaServiceWorker"></textarea>
+<button id="buttonRegisterServiceWorker">Register service worker</button>
+<button id="buttonUnregisterServiceWorker">Unregister service worker</button>
+
+<h2><label for="textAreaSubscription">Subscription</label></h2>
+<textarea id="textAreaSubscription"></textarea>
+<button id="buttonSubscribe">Subscribe to push</button>
+<button id="buttonUnsubscribe">Unsubscribe from push</button>
+
+<h2><label for="textAreaNotification">Notification</label></h2>
+<textarea id="textAreaNotification"></textarea>
+<button id="buttonNotifyMe">Notify me</button>
+<button id="buttonNotifyAll">Notify all</button>
+
+<script type="module" src="./scripts/index.js"></script>
+</body>
+</html>
