@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "netlify dev"
+    "dev": "netlify dev env:import .env"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@netlify/functions": "^1.0.0",
+    "@supabase/supabase-js": "^1.35.4",
     "web-push": "^3.5.0"
   }
 }

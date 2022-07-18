@@ -4,3 +4,4 @@ package-lock.json
 .vscode
 .netlify
 netlify/edge-functions-import-map.json
+.env
