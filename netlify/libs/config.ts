@@ -10,4 +10,11 @@ export default {
     vapidPublicKey: process.env.WEB_PUSH_VAPID_PUBLIC_KEY,
     vapidPrivateKey: process.env.WEB_PUSH_VAPID_PRIVATE_KEY,
   },
+  functions: {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+    },
+  },
 };

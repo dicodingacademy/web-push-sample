@@ -1,21 +1,16 @@
 import { Handler } from '@netlify/functions';
 import { removeSubscription } from '../libs/database';
+import config from '../libs/config';
 
 const handler: Handler = async (event) => {
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-  };
-
   await removeSubscription(event.body);
 
   return {
     statusCode: 200,
+    headers: config.functions.headers,
     body: JSON.stringify({
       message: 'OK',
     }),
-    headers,
   };
 };
 
