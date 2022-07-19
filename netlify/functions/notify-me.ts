@@ -4,6 +4,17 @@ import config from '../libs/config';
 
 const handler: Handler = async (event) => {
   webpush.setVapidDetails('mailto:academy@dicoding.com', config.webPush.vapidPublicKey, config.webPush.vapidPrivateKey);
+
+  if (!event.body) {
+    return {
+      statusCode: 400,
+      headers: config.functions.headers,
+      body: JSON.stringify({
+        message: 'No data provided',
+      }),
+    };
+  }
+
   const { data, subscription } = JSON.parse(event.body);
   const { message } = data;
 
