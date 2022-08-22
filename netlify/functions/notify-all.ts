@@ -1,6 +1,6 @@
 import { Handler } from '@netlify/functions';
 import webpush from 'web-push';
-import { getAllSubscriptions } from '../libs/database';
+import { deleteSubscriptionsByEndpoint, getAllSubscriptions } from '../libs/database';
 import config from '../libs/config';
 
 const handler: Handler = async (event) => {
@@ -18,7 +18,16 @@ const handler: Handler = async (event) => {
   const sendNotificationPromises = subscriptions
     .map(({ subscription }) => webpush.sendNotification(JSON.parse(subscription), notification));
 
-  await Promise.all(sendNotificationPromises);
+  const results = await Promise.allSettled(sendNotificationPromises);
+
+  const rejecteds = results.filter(({ status }) => status === 'rejected');
+
+  const revokeSubscriptionPromises = rejecteds.map((rejected: any) => {
+    const { endpoint } = rejected.reason;
+    return deleteSubscriptionsByEndpoint(endpoint);
+  });
+
+  await Promise.allSettled(revokeSubscriptionPromises);
 
   return {
     statusCode: 200,

@@ -13,7 +13,9 @@ const handler: Handler = async (event) => {
     };
   }
 
-  await addSubscription(event.body);
+  const { endpoint } = JSON.parse(event.body);
+
+  await addSubscription(event.body, endpoint);
 
   return {
     statusCode: 201,

@@ -1,9 +1,10 @@
 import supabase from './supabase';
 import config from './config';
 
-async function addSubscription(subscription: string) {
+async function addSubscription(subscription: string, endpoint: string) {
   const { error } = await supabase.from(config.supabase.subscriptionsTable.name).insert({
     subscription,
+    endpoint,
   });
 
   if (error) {
@@ -42,6 +43,21 @@ async function removeSubscription(subscription: string) {
     throw new Error(error.message);
   }
 }
+
+async function deleteSubscriptionsByEndpoint(endpoint: string) {
+  const { error } = await supabase.from(config.supabase.subscriptionsTable.name).delete().match({
+    endpoint,
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+}
+
 export {
-  addSubscription, removeSubscription, findSubscription, getAllSubscriptions,
+  addSubscription,
+  removeSubscription,
+  findSubscription,
+  getAllSubscriptions,
+  deleteSubscriptionsByEndpoint,
 };
