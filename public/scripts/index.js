@@ -1,16 +1,17 @@
-(async () => {
+window.addEventListener('load', async () => {
   const VAPID_PUBLIC_KEY = 'BNCBMz0qWsThtCzIO4kfM0g0V3nCGHr1igP8CJLfX7pwKEpVPPkR1Kq7VY1OF-zVl4ea79tbv4RsoFeBW0ULZ5E';
 
-  const taServiceWorker = document.querySelector('#textAreaServiceWorker');
-  const taSubscription = document.querySelector('#textAreaSubscription');
-  const taNotification = document.querySelector('#textAreaNotification');
+  const taServiceWorker = document.querySelector('#taServiceWorker');
+  const btnRegisterServiceWorker = document.querySelector('#registerServiceWorker');
+  const btnUnregisterServiceWorker = document.querySelector('#unregisterServiceWorker');
 
-  const btnRegisterServiceWorker = document.querySelector('#buttonRegisterServiceWorker');
-  const btnUnregisterServiceWorker = document.querySelector('#buttonUnregisterServiceWorker');
-  const btnSubscribe = document.querySelector('#buttonSubscribe');
-  const btnUnsubscribe = document.querySelector('#buttonUnsubscribe');
-  const btnNotifyMe = document.querySelector('#buttonNotifyMe');
-  const btnNotifyAll = document.querySelector('#buttonNotifyAll');
+  const taSubscription = document.querySelector('#taSubscription');
+  const btnSubscribe = document.querySelector('#subscribePushMessage');
+  const btnUnsubscribe = document.querySelector('#unsubscribePushMessage');
+
+  const taNotification = document.querySelector('#taNotifying');
+  const btnNotifyMe = document.querySelector('#notifyMe');
+  const btnNotifyAll = document.querySelector('#notifyAll');
 
   btnRegisterServiceWorker.addEventListener('click', async () => {
     await registerServiceWorker();
@@ -57,34 +58,47 @@
     if ('serviceWorker' in navigator) {
       try {
         await navigator.serviceWorker.register('/sw.js');
-      } catch (e) {
-        console.log('Service worker registration failed', e);
+      } catch (err) {
+        console.log('Service worker registration failed', err);
       }
     }
   }
 
   async function unregisterServiceWorker() {
     if ('serviceWorker' in navigator) {
+      const sw = await navigator.serviceWorker.ready;
+      const subscription = await sw.pushManager.getSubscription();
+
+      if (subscription) {
+        // eslint-disable-next-line no-alert
+        window.alert('Please unsubscribe push message first before unregister service worker!');
+        return;
+      }
+
       const registrations = await navigator.serviceWorker.getRegistrations();
-      await Promise.all(registrations.map((registration) => registration.unregister()));
+      await Promise.all(
+        registrations.map((registration) => registration.unregister()),
+      );
     }
   }
 
   async function subscribePushNotification() {
     const registration = await navigator.serviceWorker.ready;
 
+    console.log('subscribing push message...');
     const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
     });
 
-    await fetch('/.netlify/functions/add-subscription', {
+    const response = await fetch('/.netlify/functions/add-subscription', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(subscription),
     });
+    console.log('subscribePushNotification: response: ', response);
 
     return {
       endpoint: subscription.endpoint,
@@ -101,13 +115,14 @@
       await subscription.unsubscribe();
     }
 
-    await fetch('/.netlify/functions/remove-subscription', {
+    const response = await fetch('/.netlify/functions/remove-subscription', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(subscription),
     });
+    console.log('unsubscribePushNotification: response: ', response);
   }
 
   async function notifyMe() {
@@ -153,7 +168,7 @@
     btnNotifyAll.disabled = false;
   }
 
-  function whenUnsupportedServiceWorker() {
+  function whenServiceWorkerNotSupported() {
     taServiceWorker.value = 'Service Worker is not supported';
   }
 
@@ -176,8 +191,8 @@
   }
 
   function whenClientHasSubscription(subscription) {
-    taSubscription.value = `Push subscription: ${subscription.endpoint}`;
-    taNotification.value = 'Ready to send a push notification to this client!';
+    taSubscription.value = `Push subscription: \n${subscription.endpoint}`;
+    taNotification.value = 'Ready to send a push notification to this or all client!';
     btnUnsubscribe.disabled = false;
     btnNotifyMe.disabled = false;
     btnNotifyAll.disabled = false;
@@ -187,7 +202,7 @@
     initialStateButton();
 
     if (!('serviceWorker' in navigator)) {
-      whenUnsupportedServiceWorker();
+      whenServiceWorkerNotSupported();
       return;
     }
 
@@ -211,4 +226,4 @@
   }
 
   await init();
-})();
+});

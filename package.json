@@ -26,11 +26,11 @@
     "@types/web-push": "^3.3.2",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-import-resolver-typescript": "^3.5.0",
     "eslint-plugin-import": "^2.25.2",
-    "netlify-cli": "^10.10.0",
+    "netlify-cli": "^11.5.0",
     "ts-jest": "^28.0.7"
   },
   "dependencies": {

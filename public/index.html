@@ -1,44 +1,58 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport"
-				content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Web Push Notification Sample</title>
-	<style>
-      textarea {
-          display: block;
-          height: 125px;
-          width: 400px;
-      }
-
-      button {
-          margin-right: 10px;
-          margin-top: 10px;
-          min-width: 48px;
-          min-height: 48px;
-      }
-	</style>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Web Push Notification Demo | Dicoding Indonesia</title>
+  
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1>Push Notification client</h1>
+<header>
+  <h1 class="title">Web Push Notification Demo</h1>
+</header>
+<main>
+  <div class="container">
+    <div id="serviceWorker">
+      <h2>Service Worker</h2>
+      <div class="display">
+        <textarea id="taServiceWorker" rows="8"></textarea>
+      </div>
+      <div class="buttons">
+        <button class="btn" id="registerServiceWorker">Register</button>
+        <button class="btn" id="unregisterServiceWorker">Unregister</button>
+      </div>
+    </div>
+    <div id="subscription">
+      <h2>Subscription</h2>
+      <div class="display">
+        <textarea id="taSubscription" rows="8"></textarea>
+      </div>
+      <div class="buttons">
+        <button class="btn" id="subscribePushMessage">Subscribe Push Message</button>
+        <button class="btn" id="unsubscribePushMessage">Unsubscribe Push Message</button>
+      </div>
+    </div>
+    <div id="notify">
+      <h2>Notify</h2>
+      <div class="display">
+        <textarea id="taNotifying" rows="8"></textarea>
+      </div>
+      <div class="buttons">
+        <button class="btn" id="notifyMe">Notify Me</button>
+        <button class="btn" id="notifyAll">Notify All</button>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <p>Made with Love ❤ | Dicoding Indonesia</p>
+  </div>
+</footer>
 
-<h2><label for="textAreaServiceWorker">Service worker</label></h2>
-<textarea id="textAreaServiceWorker"></textarea>
-<button id="buttonRegisterServiceWorker">Register service worker</button>
-<button id="buttonUnregisterServiceWorker">Unregister service worker</button>
-
-<h2><label for="textAreaSubscription">Subscription</label></h2>
-<textarea id="textAreaSubscription"></textarea>
-<button id="buttonSubscribe">Subscribe to push</button>
-<button id="buttonUnsubscribe">Unsubscribe from push</button>
-
-<h2><label for="textAreaNotification">Notification</label></h2>
-<textarea id="textAreaNotification"></textarea>
-<button id="buttonNotifyMe">Notify me</button>
-<button id="buttonNotifyAll">Notify all</button>
-
-<script type="module" src="./scripts/index.js"></script>
+<script src="scripts/index.js"></script>
 </body>
 </html>

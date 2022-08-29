@@ -1,0 +1,83 @@
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 100%;
+  padding-inline: 12px;
+  padding-block: 12px;
+  margin-inline: auto;
+}
+
+/*
+    Header
+*/
+
+header {
+  padding: 1rem 0;
+}
+
+header h1.title {
+  text-align: center;
+}
+
+/*
+    Main
+*/
+
+main .display textarea {
+  width: 100%;
+  padding: 8px;
+  resize: vertical;
+}
+
+main .container > * {
+  margin-block-end: 1rem;
+}
+
+/*
+    Footer
+*/
+
+footer {
+  padding: 1rem;
+}
+
+footer p {
+  text-align: center;
+}
+
+/*
+  Button
+*/
+
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 4px;
+
+  font-weight: 400;
+  font-size: 15px;
+
+  cursor: pointer;
+  transition: 0.15s ease-in-out;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 600px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .container {
+    max-width: 800px;
+  }
+}
